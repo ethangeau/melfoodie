@@ -1,10 +1,14 @@
 import React from 'react'
+import { CssBaseline } from '@mui/material';
+
+import Header from './components/Header/Header';
 
 const App = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <CssBaseline />
+      <Header />
+    </>
   );
 }
 
