@@ -10,11 +10,12 @@ import {
 
 import SpotCard from "../SpotCard/SpotCard";
 
-const MenuBar = () => {
+const MenuBar = ({ spots }) => {
+  console.log(spots);
   const [type, setType] = useState("restaurant");
   const [rating, setRating] = useState("");
 
-  const spots = [{ name: "Steak" }, { name: "Burger" }, { name: "Pizza" }];
+  // const spots = [{ name: "Steak" }, { name: "Burger" }, { name: "Pizza" }];
 
   return (
     <>
