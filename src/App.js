@@ -8,8 +8,18 @@ import getSpots from "./api";
 
 const App = () => {
   const [spots, setSpots] = useState([]);
+  const [filteredSpots, setFilteredSpots] = useState([]);
+
+  const [childClicked, setChildClicked] = useState(null);
+  console.log({ childClicked });
+
   const [coords, setCoords] = useState({});
   const [bounds, setBounds] = useState({});
+
+  const [type, setType] = useState("restaurants");
+  const [rating, setRating] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -21,10 +31,18 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    getSpots(bounds.sw, bounds.ne).then((data) => {
+    const filtered = spots?.filter((spot) => Number(spot.rating) > rating);
+    setFilteredSpots(filtered);
+  }, [spots, rating]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getSpots(type, bounds.sw, bounds.ne).then((data) => {
       setSpots(data);
+      setFilteredSpots([]);
+      setIsLoading(false);
     });
-  }, [coords, bounds]);
+  }, [type, coords, bounds]);
 
   return (
     <>
@@ -32,14 +50,23 @@ const App = () => {
       <Header />
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
-          <MenuBar spots={spots} />
+          <MenuBar
+            spots={filteredSpots?.length ? filteredSpots : spots}
+            childClicked={childClicked}
+            isLoading={isLoading}
+            type={type}
+            setType={setType}
+            rating={rating}
+            setRating={setRating}
+          />
         </Grid>
         <Grid item xs={12} md={8}>
           <Map
             setCoords={setCoords}
             setBounds={setBounds}
             coords={coords}
-            spots={spots}
+            spots={filteredSpots?.length ? filteredSpots : spots}
+            setChildClicked={setChildClicked}
           />
         </Grid>
       </Grid>

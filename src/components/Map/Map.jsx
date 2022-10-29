@@ -3,7 +3,13 @@ import { Paper, Typography, useMediaQuery } from "@mui/material";
 import GoogleMapReact from "google-map-react";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-export default function Map({ setCoords, setBounds, coords, spots }) {
+export default function Map({
+  setCoords,
+  setBounds,
+  coords,
+  spots,
+  setChildClicked,
+}) {
   const isMobile = useMediaQuery("(max-width:600px)");
   const defaultCenter = { lat: -37.8033482, lng: 144.9609289 };
 
@@ -20,7 +26,9 @@ export default function Map({ setCoords, setBounds, coords, spots }) {
           setCoords({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
-        onChildClick={() => {}}
+        onChildClick={(child) => {
+          setChildClicked(child);
+        }}
       >
         {spots?.map((spot, i) => (
           <div key={i} lat={Number(spot.latitude)} lng={Number(spot.longitude)}>

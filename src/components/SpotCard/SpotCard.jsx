@@ -14,7 +14,11 @@ import {
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 
-export default function SpotCard({ spot }) {
+export default function SpotCard({ spot, selected, refProp }) {
+  if (selected) {
+    refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   return (
     <Card>
       <CardMedia
