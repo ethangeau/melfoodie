@@ -8,6 +8,7 @@ import {
   CardMedia,
   CardActions,
   Chip,
+  Rating,
   Typography,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -29,6 +30,12 @@ export default function SpotCard({ spot }) {
         <Typography gutterBottom variant="h5">
           {spot.name}
         </Typography>
+        <Box display="flex" justifyContent="space-between">
+          <Rating value={Number(spot.rating)} readOnly />
+          <Typography gutterBottom variant="subtitle1">
+            {spot.num_reviews} reviews
+          </Typography>
+        </Box>
         <Box display="flex" justifyContent="space-between">
           <Typography variant="subtitle1">Price Level</Typography>
           <Typography variant="subtitle1">{spot.price_level}</Typography>

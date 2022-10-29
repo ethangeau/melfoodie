@@ -35,7 +35,12 @@ const App = () => {
           <MenuBar spots={spots} />
         </Grid>
         <Grid item xs={12} md={8}>
-          <Map setCoords={setCoords} setBounds={setBounds} coords={coords} />
+          <Map
+            setCoords={setCoords}
+            setBounds={setBounds}
+            coords={coords}
+            spots={spots}
+          />
         </Grid>
       </Grid>
     </>
