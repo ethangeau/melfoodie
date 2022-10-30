@@ -9,15 +9,17 @@ import getSpots from "./api";
 const App = () => {
   const [spots, setSpots] = useState([]);
   const [filteredSpots, setFilteredSpots] = useState([]);
+  console.log(spots);
 
   const [childClicked, setChildClicked] = useState(null);
   console.log({ childClicked });
 
   const [coords, setCoords] = useState({});
   const [bounds, setBounds] = useState({});
+  console.log({ bounds });
 
   const [type, setType] = useState("restaurants");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
 

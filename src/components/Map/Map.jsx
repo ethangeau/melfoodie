@@ -37,13 +37,19 @@ export default function Map({
             ) : (
               <Paper
                 elevation={3}
-                style={{ padding: "10px", cursor: "pointer" }}
+                sx={{
+                  padding: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  width: "100px",
+                }}
               >
                 <Typography variant="subtitle3" gutterBottom>
                   {spot.name}
                 </Typography>
                 <img
-                  style={{ width: "80px" }}
+                  style={{ width: "80px", cursor: "pointer" }}
                   src={
                     spot.photo
                       ? spot.photo.images.large.url

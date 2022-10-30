@@ -31,12 +31,16 @@ const MenuBar = ({
 
   return (
     <>
-      <Typography variant="h5">Restaurant and Hotel Discovery</Typography>
+      <Typography variant="h5" sx={{ padding: 1 }}>
+        Restaurants and Hotels Discovery
+      </Typography>
       {isLoading ? (
-        <Typography variant="h6">Loading...</Typography>
+        <Typography variant="h6" sx={{ pl: 1 }}>
+          Loading...
+        </Typography>
       ) : (
         <>
-          <FormControl>
+          <FormControl sx={{ pl: 1 }}>
             <InputLabel>Type</InputLabel>
             <Select
               label="Type"
@@ -56,10 +60,10 @@ const MenuBar = ({
             >
               <MenuItem value={0}>All</MenuItem>
               <MenuItem value={3}>Above 3.0</MenuItem>
-              <MenuItem value={3}>Above 4.0</MenuItem>
+              <MenuItem value={4}>Above 4.0</MenuItem>
             </Select>
           </FormControl>
-          <Grid container spacing={3}>
+          <Grid container sx={{ pl: 1, height: "80vh", overflow: "auto" }}>
             {spots?.map((spot, i) => (
               <Grid item key={i} xs={12}>
                 <SpotCard
