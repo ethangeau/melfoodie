@@ -1,7 +1,6 @@
 {
-  "name": "local-food-shelter",
+  "name": "melfoodie",
   "version": "0.1.0",
-  "homepage": "https://yebinge.github.io/local-food-shelter",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",

@@ -9,7 +9,7 @@ const Header = () => {
       <Toolbar>
         <LunchDiningIcon sx={{ mr: 2 }} />
         <HotelIcon sx={{ mr: 2 }} />
-        <Typography variant="h5">Local Food & Shelter</Typography>
+        <Typography variant="h5">Melbourne Foodie</Typography>
       </Toolbar>
     </AppBar>
   );
