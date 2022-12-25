@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { CssBaseline, Grid } from "@mui/material";
 
-import Header from "./components/Header/Header";
-import Map from "./components/Map/Map";
-import MenuBar from "./components/MenuBar/MenuBar";
+import Header from "./components/Header";
+import Map from "./components/Map";
+import MenuBar from "./components/MenuBar";
 import getSpots from "./api";
 
 const App = () => {
