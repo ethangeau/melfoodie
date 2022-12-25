@@ -8,7 +8,7 @@ import {
   Grid,
 } from "@mui/material";
 
-import SpotCard from "../SpotCard/SpotCard";
+import SpotCard from "./SpotCard";
 
 const MenuBar = ({
   spots,
