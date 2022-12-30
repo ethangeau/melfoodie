@@ -18,8 +18,9 @@ const App = () => {
   const [bounds, setBounds] = useState({});
   console.log({ bounds });
 
-  const [type, setType] = useState("restaurants");
-  const [rating, setRating] = useState(0);
+  const [type, setType] = useState("Restaurant");
+  const [rating, setRating] = useState("All");
+  const [cuisine, setCuisine] = useState("All");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -60,6 +61,8 @@ const App = () => {
             setType={setType}
             rating={rating}
             setRating={setRating}
+            cuisine={cuisine}
+            setCuisine={setCuisine}
           />
         </Grid>
         <Grid item xs={12} md={8}>

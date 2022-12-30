@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 
 import SpotCard from "./SpotCard";
+import { types, ratings, cuisines } from "../constants/filterTypes";
 
 const MenuBar = ({
   spots,
@@ -18,6 +19,8 @@ const MenuBar = ({
   setType,
   rating,
   setRating,
+  cuisine,
+  setCuisine,
 }) => {
   const [eleRefs, setEleRefs] = useState([]);
 
@@ -47,8 +50,9 @@ const MenuBar = ({
               value={type}
               onChange={(e) => setType(e.target.value)}
             >
-              <MenuItem value="restaurants">Restaurants</MenuItem>
-              <MenuItem value="hotels">Hotels</MenuItem>
+              {types.map((t) => (
+                <MenuItem value={t}>{t}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl>
@@ -58,9 +62,21 @@ const MenuBar = ({
               value={rating}
               onChange={(e) => setRating(e.target.value)}
             >
-              <MenuItem value={0}>All</MenuItem>
-              <MenuItem value={3}>Above 3.0</MenuItem>
-              <MenuItem value={4}>Above 4.0</MenuItem>
+              {ratings.map((r) => (
+                <MenuItem value={r}>{r}</MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl>
+            <InputLabel>Cuisine</InputLabel>
+            <Select
+              label="Cuisine"
+              value={cuisine}
+              onChange={(e) => setCuisine(e.target.value)}
+            >
+              {cuisines.map((c) => (
+                <MenuItem value={c}>{c}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <Grid container sx={{ pl: 1, height: "80vh", overflow: "auto" }}>
