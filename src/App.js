@@ -52,7 +52,7 @@ const App = () => {
       <CssBaseline />
       <Header />
       <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={2.5}>
           <MenuBar
             spots={filteredSpots?.length ? filteredSpots : spots}
             childClicked={childClicked}
@@ -65,7 +65,7 @@ const App = () => {
             setCuisine={setCuisine}
           />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={9.5}>
           <Map
             setCoords={setCoords}
             setBounds={setBounds}

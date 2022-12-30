@@ -34,15 +34,12 @@ const MenuBar = ({
 
   return (
     <>
-      <Typography variant="h5" sx={{ padding: 1 }}>
-        Restaurants and Hotels Discovery
-      </Typography>
       {isLoading ? (
-        <Typography variant="h6" sx={{ pl: 1 }}>
+        <Typography variant="h6" sx={{ pl: 1, mt: 2 }}>
           Loading...
         </Typography>
       ) : (
-        <>
+        <div style={{ marginTop: "1rem" }}>
           <FormControl sx={{ pl: 1 }}>
             <InputLabel>Type</InputLabel>
             <Select
@@ -90,7 +87,7 @@ const MenuBar = ({
               </Grid>
             ))}
           </Grid>
-        </>
+        </div>
       )}
     </>
   );
