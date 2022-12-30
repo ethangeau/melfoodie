@@ -1,6 +1,6 @@
-export const type = ["Restaurant", "Cafe", "Bar"];
+export const types = ["Restaurant", "Cafe", "Bar"];
 
-export const rating = [
+export const ratings = [
   "All",
   "Above 3.0",
   "Above 3.5",
@@ -8,7 +8,7 @@ export const rating = [
   "Above 4.5",
 ];
 
-export const cuisine = [
+export const cuisines = [
   "All",
   "Chinese",
   "French",
