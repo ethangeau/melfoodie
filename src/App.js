@@ -18,7 +18,7 @@ const App = () => {
   const [bounds, setBounds] = useState({});
   console.log({ bounds });
 
-  const [type, setType] = useState("Restaurant");
+  const [type, setType] = useState("restaurants");
   const [rating, setRating] = useState("All");
   const [cuisine, setCuisine] = useState("All");
 
