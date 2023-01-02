@@ -48,7 +48,9 @@ const MenuBar = ({
               onChange={(e) => setType(e.target.value)}
             >
               {types.map((t) => (
-                <MenuItem value={t}>{t}</MenuItem>
+                <MenuItem key={t} value={t}>
+                  {t}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -60,7 +62,9 @@ const MenuBar = ({
               onChange={(e) => setRating(e.target.value)}
             >
               {ratings.map((r) => (
-                <MenuItem value={r}>{r}</MenuItem>
+                <MenuItem key={r} value={r}>
+                  {r}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -72,7 +76,9 @@ const MenuBar = ({
               onChange={(e) => setCuisine(e.target.value)}
             >
               {cuisines.map((c) => (
-                <MenuItem value={c}>{c}</MenuItem>
+                <MenuItem key={c} value={c}>
+                  {c}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
