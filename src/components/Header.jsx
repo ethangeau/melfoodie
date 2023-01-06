@@ -1,15 +1,15 @@
 import React from "react";
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { Box, AppBar, Toolbar, Typography } from "@mui/material";
 import LunchDiningIcon from "@mui/icons-material/LunchDining";
 
 const Header = () => {
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <LunchDiningIcon sx={{ mr: 2 }} />
-        <Typography variant="h5">Melbourne Foodie</Typography>
-      </Toolbar>
-    </AppBar>
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <LunchDiningIcon sx={{ m: 2 }} />
+      <Typography variant="h5" sx={{ fontFamily: "cursive" }}>
+        Melbourne Foodie
+      </Typography>
+    </div>
   );
 };
 
