@@ -6,6 +6,7 @@ import {
   Select,
   InputLabel,
   Grid,
+  CircularProgress,
 } from "@mui/material";
 
 import SpotCard from "./SpotCard";
@@ -35,12 +36,10 @@ const MenuBar = ({
   return (
     <>
       {isLoading ? (
-        <Typography variant="h6" sx={{ pl: 1, mt: 2 }}>
-          Loading...
-        </Typography>
+        <CircularProgress size="6rem" />
       ) : (
-        <div style={{ marginTop: "1rem" }}>
-          <FormControl sx={{ pl: 1 }}>
+        <div style={{ margin: "10px" }}>
+          <FormControl>
             <InputLabel>Type</InputLabel>
             <Select
               label="Type"
