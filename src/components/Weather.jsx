@@ -38,7 +38,7 @@ const Weather = () => {
         top: "1rem",
         right: "6rem",
         zIndex: 1,
-        background: `linear-gradient(to bottom left, #86E5FF, #c4eaf5)`,
+        background: `linear-gradient(to bottom left, #5BC0F8, #c4eaf5)`,
         borderRadius: "20px",
       }}
     >
