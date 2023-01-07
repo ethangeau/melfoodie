@@ -32,52 +32,66 @@ const Weather = () => {
   };
 
   return (
-    <List sx={{ width: "100%", maxWidth: "360px" }}>
-      {hourlyData.list ? (
-        isExpanded ? (
-          hourlyData.list.slice(0, 6).map((hour, index) => (
-            <ListItem key={hour.dt}>
+    <div
+      style={{
+        position: "absolute",
+        top: "1rem",
+        right: "6rem",
+        zIndex: 1,
+        background: `linear-gradient(to bottom left, #86E5FF, #c4eaf5)`,
+        borderRadius: "20px",
+      }}
+    >
+      <List sx={{ width: "100%", maxWidth: "360px" }}>
+        {hourlyData.list ? (
+          isExpanded ? (
+            hourlyData.list.slice(0, 6).map((hour, index) => (
+              <ListItem key={hour.dt}>
+                <ListItemAvatar>
+                  <Avatar
+                    alt="Hour"
+                    src={`icons/${hour.weather[0].icon}.png`}
+                  />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={`${convertToAEST(hour.dt_txt)}: ${Math.round(
+                    hour.main.temp
+                  )}°C`}
+                  secondary={hour.weather[0].description}
+                />
+                {index === 0 && (
+                  <IconButton onClick={handleExpandClick}>
+                    <UnfoldLessIcon />
+                  </IconButton>
+                )}
+              </ListItem>
+            ))
+          ) : (
+            <ListItem>
               <ListItemAvatar>
-                <Avatar alt="Hour" src={`icons/${hour.weather[0].icon}.png`} />
+                <Avatar
+                  alt="Hour"
+                  src={`icons/${hourlyData.list[0].weather[0].icon}.png`}
+                />
               </ListItemAvatar>
               <ListItemText
-                primary={`${convertToAEST(hour.dt_txt)}: ${Math.round(
-                  hour.main.temp
-                )}°C`}
-                secondary={hour.weather[0].description}
+                primary={`${convertToAEST(
+                  hourlyData.list[0].dt_txt
+                )}: ${Math.round(hourlyData.list[0].main.temp)}°C`}
+                secondary={hourlyData.list[0].weather[0].description}
               />
-              {index === 0 && (
-                <IconButton onClick={handleExpandClick}>
-                  <UnfoldLessIcon />
-                </IconButton>
-              )}
+              <IconButton onClick={handleExpandClick}>
+                <UnfoldMoreIcon />
+              </IconButton>
             </ListItem>
-          ))
+          )
         ) : (
           <ListItem>
-            <ListItemAvatar>
-              <Avatar
-                alt="Hour"
-                src={`icons/${hourlyData.list[0].weather[0].icon}.png`}
-              />
-            </ListItemAvatar>
-            <ListItemText
-              primary={`${convertToAEST(
-                hourlyData.list[0].dt_txt
-              )}: ${Math.round(hourlyData.list[0].main.temp)}°C`}
-              secondary={hourlyData.list[0].weather[0].description}
-            />
-            <IconButton onClick={handleExpandClick}>
-              <UnfoldMoreIcon />
-            </IconButton>
+            <ListItemText primary="Loading..." />
           </ListItem>
-        )
-      ) : (
-        <ListItem>
-          <ListItemText primary="Loading..." />
-        </ListItem>
-      )}
-    </List>
+        )}
+      </List>
+    </div>
   );
 };
 
