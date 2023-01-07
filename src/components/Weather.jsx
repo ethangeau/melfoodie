@@ -38,10 +38,7 @@ const Weather = () => {
           hourlyData.list.slice(0, 6).map((hour, index) => (
             <ListItem key={hour.dt}>
               <ListItemAvatar>
-                <Avatar
-                  alt="Hour"
-                  src={`http://openweathermap.org/img/wn/${hour.weather[0].icon}@2x.png`}
-                />
+                <Avatar alt="Hour" src={`icons/${hour.weather[0].icon}.png`} />
               </ListItemAvatar>
               <ListItemText
                 primary={`${convertToAEST(hour.dt_txt)}: ${Math.round(
@@ -61,7 +58,7 @@ const Weather = () => {
             <ListItemAvatar>
               <Avatar
                 alt="Hour"
-                src={`http://openweathermap.org/img/wn/${hourlyData.list[0].weather[0].icon}@2x.png`}
+                src={`icons/${hourlyData.list[0].weather[0].icon}.png`}
               />
             </ListItemAvatar>
             <ListItemText
