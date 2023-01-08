@@ -39,7 +39,7 @@ const MenuBar = ({
         <CircularProgress size="6rem" />
       ) : (
         <div style={{ margin: "10px" }}>
-          <FormControl>
+          <FormControl size="small" sx={{ minWidth: "125px" }}>
             <InputLabel>Type</InputLabel>
             <Select
               label="Type"
@@ -53,21 +53,7 @@ const MenuBar = ({
               ))}
             </Select>
           </FormControl>
-          <FormControl>
-            <InputLabel>Rating</InputLabel>
-            <Select
-              label="Rating"
-              value={rating}
-              onChange={(e) => setRating(e.target.value)}
-            >
-              {ratings.map((r) => (
-                <MenuItem key={r} value={r}>
-                  {r}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-          <FormControl>
+          <FormControl size="small" sx={{ minWidth: "120px" }}>
             <InputLabel>Cuisine</InputLabel>
             <Select
               label="Cuisine"
@@ -77,6 +63,20 @@ const MenuBar = ({
               {cuisines.map((c) => (
                 <MenuItem key={c} value={c}>
                   {c}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl size="small" sx={{ minWidth: "85px" }}>
+            <InputLabel>Rating</InputLabel>
+            <Select
+              label="Rating"
+              value={rating}
+              onChange={(e) => setRating(e.target.value)}
+            >
+              {ratings.map((r) => (
+                <MenuItem key={r} value={r}>
+                  {r}
                 </MenuItem>
               ))}
             </Select>
