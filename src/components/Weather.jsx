@@ -50,7 +50,7 @@ const Weather = () => {
                 <ListItemAvatar>
                   <Avatar
                     alt="Hour"
-                    src={`icons/${hour.weather[0].icon}.png`}
+                    src={`weatherIcons/${hour.weather[0].icon}.png`}
                   />
                 </ListItemAvatar>
                 <ListItemText
@@ -71,7 +71,7 @@ const Weather = () => {
               <ListItemAvatar>
                 <Avatar
                   alt="Hour"
-                  src={`icons/${hourlyData.list[0].weather[0].icon}.png`}
+                  src={`weatherIcons/${hourlyData.list[0].weather[0].icon}.png`}
                 />
               </ListItemAvatar>
               <ListItemText
