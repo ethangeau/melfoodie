@@ -28,7 +28,7 @@ const Weather = () => {
   const convertToAEST = (date) => {
     const utcMoment = moment.utc(date, "YYYY-MM-DD HH:mm:ss");
     utcMoment.tz("Australia/Melbourne");
-    return utcMoment.format("YYYY-MM-DD HH:mm");
+    return utcMoment.format("dddd, DD MMM, h:mm a");
   };
 
   return (
@@ -54,9 +54,9 @@ const Weather = () => {
                   />
                 </ListItemAvatar>
                 <ListItemText
-                  primary={`${convertToAEST(hour.dt_txt)}: ${Math.round(
-                    hour.main.temp
-                  )}°C`}
+                  primary={`${Math.round(hour.main.temp)}°C ${convertToAEST(
+                    hour.dt_txt
+                  )}`}
                   secondary={hour.weather[0].description}
                 />
                 {index === 0 && (
@@ -75,9 +75,9 @@ const Weather = () => {
                 />
               </ListItemAvatar>
               <ListItemText
-                primary={`${convertToAEST(
-                  hourlyData.list[0].dt_txt
-                )}: ${Math.round(hourlyData.list[0].main.temp)}°C`}
+                primary={`${Math.round(
+                  hourlyData.list[0].main.temp
+                )}°C ${convertToAEST(hourlyData.list[0].dt_txt)}`}
                 secondary={hourlyData.list[0].weather[0].description}
               />
               <IconButton onClick={handleExpandClick}>
