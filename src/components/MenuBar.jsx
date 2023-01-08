@@ -1,6 +1,5 @@
 import React, { useState, useEffect, createRef } from "react";
 import {
-  Typography,
   FormControl,
   MenuItem,
   Select,
@@ -81,7 +80,7 @@ const MenuBar = ({
               ))}
             </Select>
           </FormControl>
-          <Grid container sx={{ pl: 1, height: "80vh", overflow: "auto" }}>
+          <Grid container sx={{ height: "85vh", overflow: "auto" }}>
             {spots?.map((spot, i) => (
               <Grid item key={i} xs={12}>
                 <SpotCard
