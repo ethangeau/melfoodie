@@ -4,7 +4,11 @@ import { CssBaseline, Grid } from "@mui/material";
 import Header from "./components/Header";
 import Map from "./components/Map";
 import MenuBar from "./components/MenuBar";
-import getSpots from "./api";
+import { getSpots } from "./api";
+import NewMap from "./components/NewMap";
+import Weather from "./components/Weather";
+import Search from "./components/Search";
+import Reviews from "./components/Reviews";
 
 const App = () => {
   const [spots, setSpots] = useState([]);
@@ -12,47 +16,50 @@ const App = () => {
   console.log(spots);
 
   const [childClicked, setChildClicked] = useState(null);
-  console.log({ childClicked });
 
-  const [coords, setCoords] = useState({});
-  const [bounds, setBounds] = useState({});
-  console.log({ bounds });
+  // const [coords, setCoords] = useState({});
+  // const [bounds, setBounds] = useState({});
 
-  const [type, setType] = useState("restaurants");
+  const [type, setType] = useState("Restaurant");
   const [rating, setRating] = useState("All");
   const [cuisine, setCuisine] = useState("All");
 
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }) => {
-        setCoords({ lat: latitude, lng: longitude });
-        console.log(latitude, longitude);
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(
+  //     ({ coords: { latitude, longitude } }) => {
+  //       setCoords({ lat: latitude, lng: longitude });
+  //       console.log(latitude, longitude);
+  //     }
+  //   );
+  // }, []);
 
   useEffect(() => {
     const filtered = spots?.filter((spot) => Number(spot.rating) > rating);
     setFilteredSpots(filtered);
-  }, [spots, rating]);
+  }, [rating]);
+
+  useEffect(() => {
+    const filtered = spots?.filter((cuisine) => {});
+    setFilteredSpots(filtered);
+  }, [cuisine]);
 
   useEffect(() => {
     setIsLoading(true);
-    getSpots(type, bounds.sw, bounds.ne).then((data) => {
+    getSpots(type).then((data) => {
       setSpots(data);
       setFilteredSpots([]);
       setIsLoading(false);
     });
-  }, [type, coords, bounds]);
+  }, [type]);
 
   return (
     <>
       <CssBaseline />
-      <Header />
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={2.5}>
+      <Grid container sx={{ height: "100vh" }}>
+        <Grid item xs={12} md={3}>
+          <Header />
           <MenuBar
             spots={filteredSpots?.length ? filteredSpots : spots}
             childClicked={childClicked}
@@ -65,14 +72,11 @@ const App = () => {
             setCuisine={setCuisine}
           />
         </Grid>
-        <Grid item xs={12} md={9.5}>
-          <Map
-            setCoords={setCoords}
-            setBounds={setBounds}
-            coords={coords}
-            spots={filteredSpots?.length ? filteredSpots : spots}
-            setChildClicked={setChildClicked}
-          />
+        <Grid item xs={12} md={9} sx={{ position: "relative" }}>
+          <Reviews />
+          <Search />
+          <Weather />
+          <NewMap />
         </Grid>
       </Grid>
     </>
@@ -80,3 +84,10 @@ const App = () => {
 };
 
 export default App;
+
+{
+  /* <Map
+spots={filteredSpots?.length ? filteredSpots : spots}
+setChildClicked={setChildClicked}
+/> */
+}

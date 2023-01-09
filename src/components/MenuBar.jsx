@@ -80,7 +80,7 @@ const MenuBar = ({
               ))}
             </Select>
           </FormControl>
-          <Grid container sx={{ height: "85vh", overflow: "auto" }}>
+          <Grid container sx={{ height: "82vh", overflow: "auto" }}>
             {spots?.map((spot, i) => (
               <Grid item key={i} xs={12}>
                 <SpotCard
