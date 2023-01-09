@@ -1,0 +1,5 @@
+services:
+  client:
+    build: ../melfoodie
+    ports:
+      - 3000:3000
