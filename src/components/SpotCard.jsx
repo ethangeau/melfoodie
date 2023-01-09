@@ -13,14 +13,22 @@ import {
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 
-export default function SpotCard({ spot, selected, refProp }) {
+export default function SpotCard({
+  spot,
+  selected,
+  refProp,
+  setSpotID,
+  setDisplayDetail,
+}) {
+  const IMG_URL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&photo_reference=${spot.photos[0].photo_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+
   if (selected) {
     refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
-  if (selected) console.log(selected);
 
   const handleOnClick = () => {
-    console.log("reviews clicked");
+    setSpotID(spot.place_id);
+    setDisplayDetail(true);
   };
 
   return (
@@ -31,22 +39,19 @@ export default function SpotCard({ spot, selected, refProp }) {
         flexDirection: "column",
         mb: "1px",
       }}
+      onClick={handleOnClick}
     >
       <Box sx={{ display: "flex" }}>
         <Box sx={{ display: "flex", flexDirection: "column", width: "75%" }}>
           <CardContent sx={{ pb: "10px !important" }}>
-            <Typography gutterBottom variant="h6">
-              <Link
-                href={spot.website}
-                underline="hover"
-                color="inherit"
-                target="_blank"
-              >
-                {spot.name}
-              </Link>
+            <Typography
+              variant="subtitle1"
+              sx={{ fontWeight: "bold", ml: "4px", mb: "0.5rem" }}
+            >
+              {spot.name}
             </Typography>
             <Box display="flex">
-              <Typography gutterBottom variant="body2" sx={{ mr: "2px" }}>
+              <Typography variant="body2" sx={{ mx: "4px", mb: "0.3rem" }}>
                 {parseFloat(spot.rating).toFixed(1)}
               </Typography>
               <Rating
@@ -54,34 +59,26 @@ export default function SpotCard({ spot, selected, refProp }) {
                 precision={0.1}
                 readOnly
                 size="small"
-                sx={{ mr: "2px" }}
+                sx={{ mr: "5px" }}
               />
-              <Typography
-                gutterBottom
-                variant="body2"
-                onClick={handleOnClick}
-                sx={{
-                  cursor: "pointer",
-                  textDecoration: "underline",
-                }}
-              >
-                {spot.num_reviews} reviews
+              <Typography variant="body2">
+                {spot.user_ratings_total} reviews
               </Typography>
             </Box>
-            <Box display="flex">
-              <Typography variant="body2" gutterBottom>
-                {spot.price_level}
+            {spot.price_level && (
+              <Typography variant="body2" sx={{ ml: "3px", mb: "0.3rem" }}>
+                {"$".repeat(Number(spot.price_level))}
               </Typography>
-            </Box>
-            {spot.address && (
+            )}
+            {spot.vicinity && (
               <Typography
                 gutterBottom
                 variant="body2"
                 display="flex"
                 alignItems="center"
               >
-                <LocationOnIcon fontSize="small" />
-                {spot.address.split(",")[0]}
+                <LocationOnIcon fontSize="small" sx={{ mr: "2px" }} />
+                {spot.vicinity.split(",")[0]}
               </Typography>
             )}
             {spot.phone && (
@@ -101,11 +98,7 @@ export default function SpotCard({ spot, selected, refProp }) {
         >
           <Avatar
             alt={spot.name}
-            src={
-              spot.photo
-                ? spot.photo.images.large.url
-                : "https://www.pexels.com/zh-cn/photo/225228/"
-            }
+            src={spot.photos ? IMG_URL : spot.icon}
             sx={{ width: 80, height: 80, borderRadius: 2 }}
           />
         </Box>
@@ -119,8 +112,8 @@ export default function SpotCard({ spot, selected, refProp }) {
           mb: "5px",
         }}
       >
-        {spot.cuisine?.slice(0, 4).map(({ key, name }) => (
-          <Chip key={key} size="small" label={name} />
+        {spot.types?.slice(0, 4).map((type) => (
+          <Chip key={type} size="small" label={type} />
         ))}
       </Box>
     </Card>
