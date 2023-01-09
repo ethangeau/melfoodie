@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const BASE_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+const BASE_URL = `${process.env.REACT_APP_PROXY_SERVER_URL}/https://maps.googleapis.com/maps/api/place`;
 const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 export const getSpots = async (type) => {
   try {
-    const response = await axios.get(BASE_URL, {
+    const response = await axios.get(`${BASE_URL}/nearbysearch/json`, {
       params: {
-        location: "-37.8120457,144.9600149",
+        location: `${process.env.REACT_APP_MEL_LAT},${process.env.REACT_APP_MEL_LON}`,
         radius: 3000,
         type: type,
         key: key,
@@ -16,8 +16,26 @@ export const getSpots = async (type) => {
     const {
       data: { results },
     } = response;
-
     return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getSpotDetail = async (spotID) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/details/json`, {
+      params: {
+        place_id: spotID,
+        fields:
+          "name,rating,formatted_phone_number,reviews,editorial_summary,website,opening_hours",
+        key: key,
+      },
+    });
+    const {
+      data: { result },
+    } = response;
+    return result;
   } catch (error) {
     console.log(error);
   }
@@ -39,32 +57,3 @@ export const getWeather = async () => {
     console.log(error);
   }
 };
-
-// const API_HOST = "travel-advisor.p.rapidapi.com";
-
-// export const getSpots = async (type) => {
-//   try {
-//     const response = await axios.get(
-//       `https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary`,
-//       {
-//         params: {
-//           bl_latitude: -37.82644,
-//           tr_latitude: -37.803993,
-//           bl_longitude: 144.942759,
-//           tr_longitude: 144.97938,
-//         },
-//         headers: {
-//           "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
-//           "X-RapidAPI-Host": API_HOST,
-//         },
-//       }
-//     );
-//     const {
-//       data: { data },
-//     } = response;
-
-//     return data;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
