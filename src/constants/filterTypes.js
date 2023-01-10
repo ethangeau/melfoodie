@@ -1,6 +1,6 @@
 export const types = ["Restaurant", "Cafe", "Bar"];
 
-export const ratings = ["All", "3.5 +", "4.0 +", "4.5 +"];
+export const ratings = [0, 3.5, 4.0, 4.5];
 
 export const cuisines = [
   "All",
