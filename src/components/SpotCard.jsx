@@ -8,26 +8,20 @@ import {
   Chip,
   Rating,
   Typography,
-  Link,
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 
 export default function SpotCard({
   spot,
-  selected,
-  refProp,
-  setSpotID,
+  selectedSpotId,
+  setSelectedSpotId,
   setDisplayDetail,
 }) {
   const IMG_URL = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=150&photo_reference=${spot.photos[0].photo_reference}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
 
-  if (selected) {
-    refProp?.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   const handleOnClick = () => {
-    setSpotID(spot.place_id);
+    setSelectedSpotId(spot.place_id);
     setDisplayDetail(true);
   };
 
@@ -38,6 +32,8 @@ export default function SpotCard({
         display: "flex",
         flexDirection: "column",
         mb: "1px",
+        backgroundColor: spot.place_id === selectedSpotId ? "#e0e0e0" : "#fff",
+        cursor: "pointer",
       }}
       onClick={handleOnClick}
     >
