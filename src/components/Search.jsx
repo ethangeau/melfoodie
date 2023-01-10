@@ -22,7 +22,7 @@ const Search = () => {
         onKeyDown={handleKeyPress}
         name="search"
         value={search}
-        placeholder="name or cuisine"
+        placeholder="name"
         size="small"
         InputProps={{
           startAdornment: (
