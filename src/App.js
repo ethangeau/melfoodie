@@ -2,38 +2,47 @@ import React, { useState, useEffect } from "react";
 import { CssBaseline, Grid } from "@mui/material";
 
 import Header from "./components/Header";
-import Map from "./components/Map";
 import MenuBar from "./components/MenuBar";
 import { getSpots } from "./api";
 import NewMap from "./components/NewMap";
 import Weather from "./components/Weather";
-import Search from "./components/Search";
-import Reviews from "./components/Reviews";
+import SpotDetail from "./components/SpotDetail";
+import { getSpotDetail } from "./api";
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [spots, setSpots] = useState([]);
   const [filteredSpots, setFilteredSpots] = useState([]);
-  console.log(spots);
 
-  const [childClicked, setChildClicked] = useState(null);
-
-  // const [coords, setCoords] = useState({});
-  // const [bounds, setBounds] = useState({});
+  const [displayDetail, setDisplayDetail] = useState(false);
+  const [selectedSpotId, setSelectedSpotId] = useState(null);
+  const [spotDetail, setSpotDetail] = useState([]);
 
   const [type, setType] = useState("Restaurant");
-  const [rating, setRating] = useState("All");
-  const [cuisine, setCuisine] = useState("All");
+  const [rating, setRating] = useState(0);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [isNextLoading, setIsNextLoading] = useState(false);
+  const [nextPageToken, setNextPageToken] = useState(null);
+  const [hasNextPage, setHasNextPage] = useState(true);
 
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition(
-  //     ({ coords: { latitude, longitude } }) => {
-  //       setCoords({ lat: latitude, lng: longitude });
-  //       console.log(latitude, longitude);
-  //     }
-  //   );
-  // }, []);
+  useEffect(() => {
+    setIsLoading(true);
+    setNextPageToken(null);
+    setRating(0);
+    getSpots(type.toLowerCase(), nextPageToken).then((data) => {
+      setSpots(data.results);
+      setNextPageToken(data.next_page_token);
+      setFilteredSpots([]);
+      setIsLoading(false);
+    });
+  }, [type]);
+
+  useEffect(() => {
+    getSpotDetail(selectedSpotId).then((data) => {
+      setSpotDetail(data);
+    });
+  }, [selectedSpotId]);
 
   useEffect(() => {
     const filtered = spots?.filter((spot) => Number(spot.rating) > rating);
@@ -41,18 +50,17 @@ const App = () => {
   }, [rating]);
 
   useEffect(() => {
-    const filtered = spots?.filter((cuisine) => {});
-    setFilteredSpots(filtered);
-  }, [cuisine]);
-
-  useEffect(() => {
-    setIsLoading(true);
-    getSpots(type).then((data) => {
-      setSpots(data);
-      setFilteredSpots([]);
-      setIsLoading(false);
+    if (!nextPageToken && page > 1) {
+      setHasNextPage(false);
+      return;
+    }
+    setIsNextLoading(true);
+    getSpots(type.toLowerCase(), nextPageToken).then((data) => {
+      setSpots([...spots, ...data.results]);
+      setNextPageToken(data.next_page_token);
+      setIsNextLoading(false);
     });
-  }, [type]);
+  }, [page]);
 
   return (
     <>
@@ -62,21 +70,35 @@ const App = () => {
           <Header />
           <MenuBar
             spots={filteredSpots?.length ? filteredSpots : spots}
-            childClicked={childClicked}
             isLoading={isLoading}
             type={type}
             setType={setType}
             rating={rating}
             setRating={setRating}
-            cuisine={cuisine}
-            setCuisine={setCuisine}
+            selectedSpotId={selectedSpotId}
+            setSelectedSpotId={setSelectedSpotId}
+            setDisplayDetail={setDisplayDetail}
+            isNextLoading={isNextLoading}
+            page={page}
+            setPage={setPage}
+            hasNextPage={hasNextPage}
           />
         </Grid>
         <Grid item xs={12} md={9} sx={{ position: "relative" }}>
-          <Reviews />
-          <Search />
+          <NewMap
+            spots={filteredSpots?.length ? filteredSpots : spots}
+            selectedSpotId={selectedSpotId}
+            setSelectedSpotId={setSelectedSpotId}
+            setDisplayDetail={setDisplayDetail}
+          />
           <Weather />
-          <NewMap />
+          {spotDetail && (
+            <SpotDetail
+              spotDetail={spotDetail}
+              displayDetail={displayDetail}
+              setDisplayDetail={setDisplayDetail}
+            />
+          )}
         </Grid>
       </Grid>
     </>
@@ -84,10 +106,3 @@ const App = () => {
 };
 
 export default App;
-
-{
-  /* <Map
-spots={filteredSpots?.length ? filteredSpots : spots}
-setChildClicked={setChildClicked}
-/> */
-}
