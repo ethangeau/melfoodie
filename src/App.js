@@ -30,6 +30,8 @@ const App = () => {
     setIsLoading(true);
     setNextPageToken(null);
     setRating(0);
+    setDisplayDetail(false);
+    setSpotDetail([]);
     getSpots(type.toLowerCase(), nextPageToken).then((data) => {
       setSpots(data.results);
       setNextPageToken(data.next_page_token);
