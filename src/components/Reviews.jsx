@@ -1,42 +1,10 @@
 import React, { useState } from "react";
-import { Grid, Typography, Box } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ReviewCard from "./ReviewCard";
 
 const Reviews = () => {
-  const [displayReviews, setDisplayReviews] = useState(true);
-
-  const reviews = [
-    {
-      id: 1,
-      name: "ethan",
-      rating: "4",
-      time: "1-7-2020",
-      text: "Fantastic restaurant. It was our first time here trying their chef selection menu. The quality of pasta is great and the sauce is rich with layers of flavors. We were really impressed by their dessert. ",
-    },
-    {
-      id: 2,
-      name: "James",
-      rating: "3",
-      time: "1-3-2022",
-      text: "It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu.It was our first time here trying their chef selection menu. The quality of pasta is great and the sauce is rich with layers of flavors. We were really impressed by their dessert. ",
-    },
-    {
-      id: 3,
-      name: "John",
-      rating: "5",
-      time: "5-3-2022",
-      text: "Great restaurant and delicious food with amazing atmosphere. Our waitress was absolutely amazing and attentive. It was our first time here trying their chef selection menu. The quality of pasta is great and the sauce is rich with layers of flavors. We were really impressed by their dessert. ",
-    },
-    {
-      id: 4,
-      name: "John",
-      rating: "5",
-      time: "5-3-2022",
-      text: "Great restaurant and delicious food with amazing atmosphere. Our waitress was absolutely amazing and attentive. It was our first time here trying their chef selection menu. The quality of pasta is great and the sauce is rich with layers of flavors. We were really impressed by their dessert. ",
-    },
-  ];
-
+  const [displayReviews, setDisplayReviews] = useState(false);
   return (
     <>
       {displayReviews && (

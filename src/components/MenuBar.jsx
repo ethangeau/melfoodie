@@ -9,29 +9,24 @@ import {
 } from "@mui/material";
 
 import SpotCard from "./SpotCard";
-import { types, ratings, cuisines } from "../constants/filterTypes";
+import { types, ratings } from "../constants/filterTypes";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 const MenuBar = ({
   spots,
-  childClicked,
   isLoading,
   type,
   setType,
   rating,
   setRating,
-  cuisine,
-  setCuisine,
+  selectedSpotId,
+  setSelectedSpotId,
+  setDisplayDetail,
+  isNextLoading,
+  page,
+  setPage,
+  hasNextPage,
 }) => {
-  const [eleRefs, setEleRefs] = useState([]);
-
-  useEffect(() => {
-    setEleRefs((refs) =>
-      Array(spots?.length)
-        .fill()
-        .map((_, i) => refs[i] || createRef())
-    );
-  }, [spots]);
-
   return (
     <>
       {isLoading ? (
@@ -52,20 +47,6 @@ const MenuBar = ({
               ))}
             </Select>
           </FormControl>
-          <FormControl size="small" sx={{ minWidth: "120px" }}>
-            <InputLabel>Cuisine</InputLabel>
-            <Select
-              label="Cuisine"
-              value={cuisine}
-              onChange={(e) => setCuisine(e.target.value)}
-            >
-              {cuisines.map((c) => (
-                <MenuItem key={c} value={c}>
-                  {c}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
           <FormControl size="small" sx={{ minWidth: "85px" }}>
             <InputLabel>Rating</InputLabel>
             <Select
@@ -75,7 +56,7 @@ const MenuBar = ({
             >
               {ratings.map((r) => (
                 <MenuItem key={r} value={r}>
-                  {r}
+                  {r === 0 ? "All" : `${r} +`}
                 </MenuItem>
               ))}
             </Select>
@@ -85,11 +66,39 @@ const MenuBar = ({
               <Grid item key={i} xs={12}>
                 <SpotCard
                   spot={spot}
-                  selected={Number(childClicked) === i}
-                  refProp={eleRefs[i]}
+                  selectedSpotId={selectedSpotId}
+                  setSelectedSpotId={setSelectedSpotId}
+                  setDisplayDetail={setDisplayDetail}
                 />
               </Grid>
             ))}
+            {isNextLoading && (
+              <Grid
+                item
+                xs={12}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <CircularProgress size="3rem" />
+              </Grid>
+            )}
+            {hasNextPage && (
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <UnfoldMoreIcon
+                  fontSize="large"
+                  onClick={() => {
+                    setPage(page + 1);
+                  }}
+                />
+              </Grid>
+            )}
           </Grid>
         </div>
       )}
