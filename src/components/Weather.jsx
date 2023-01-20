@@ -28,7 +28,7 @@ const Weather = () => {
   const convertToAEST = (date) => {
     const utcMoment = moment.utc(date, "YYYY-MM-DD HH:mm:ss");
     utcMoment.tz("Australia/Melbourne");
-    return utcMoment.format("dddd, DD MMM, h:mm a");
+    return utcMoment.format("ddd, DD MMM, h:mm a");
   };
 
   return (
