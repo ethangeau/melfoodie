@@ -10,7 +10,7 @@ It features ratings and reviews to assist you in finding the perfect spot, also 
 
 It's built with React, Node, Google Maps API, OpenWeather API, Docker, and runs on AWS EC2 instance.
 
-## Setup:
+## Setup
 
 - create the `.env file` for API keys
 - run `npm i` and `npm start` for both client and proxyServer if running locally
